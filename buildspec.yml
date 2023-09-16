@@ -1,0 +1,36 @@
+version: 0.2
+
+proxy:
+  upload-artifacts: yes
+  logs: yes
+
+batch:
+  fast-fail: false
+  # build-list:
+  # build-matrix:
+  # build-graph:
+        
+phases:
+  install:
+    run-as: Linux-user-name
+    on-failure: ABORT
+    runtime-versions:
+      nodejs: 18
+    commands:
+        - echo Installing dependencies...
+        - npm install
+  build:
+    commands:
+        - echo Build started on `date`
+        - echo Compiling the Node.js code...
+        - npm run build
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
+
+cache:
+  paths:
+    - 'node_modules/**/*' # Cache `node_modules` for faster `yarn` or `npm i`
+    - '.next/cache/**/*' # Cache Next.js for faster application rebuilds
