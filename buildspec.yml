@@ -15,7 +15,7 @@ phases:
     run-as: Linux-user-name
     on-failure: ABORT
     runtime-versions:
-      nodejs: 18
+      nodejs: 19
     commands:
         - echo Installing dependencies...
         - npm install
