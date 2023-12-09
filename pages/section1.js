@@ -27,7 +27,8 @@ export default function Section1() {
                     className={styles.image}
                     height={350}
                     width={350}
-                    src="/images/sophsLogo.png"
+                    //src="/images/sophsLogo.png"
+                    src="https://sophs-menu-bucket.s3.us-east-2.amazonaws.com/Bob.jpeg"
                     alt={"Food"}
                 />
             </div>
