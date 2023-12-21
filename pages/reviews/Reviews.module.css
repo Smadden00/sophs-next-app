@@ -1,6 +1,7 @@
 .reviewsContainer{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   min-height: 78vh;
   color: var(--color2)
@@ -101,4 +102,17 @@
   align-items: flex-start;
   align-content: flex-start;
   padding-bottom: 20px;
+}
+
+/************************
+Add Reviews
+*************************/
+
+.addAReviewContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 78vh;
+  color: var(--color2)
 }

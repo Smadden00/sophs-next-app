@@ -2,17 +2,15 @@ import styles from "./imageLink.module.css";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function ImageLink({}) {
+export default function ImageLink({title, subText}) {
 
   const [hover, setHover] = useState(false);
 
-  const title = "Title"
-  const prepTime = "Prep Time"
 
   const textBox = (
   <div className={styles.textBox}>
     <h1>{title}</h1>
-    <h1>{prepTime}</h1>
+    <h1>{subText}</h1>
   </div>
   )
 
