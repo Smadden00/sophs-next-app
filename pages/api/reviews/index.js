@@ -10,9 +10,8 @@ export default async function handler(req, res){
             const client = await pool.connect()
             const data = await client.query('SELECT * FROM reviews;');
             res.status(200).json({ body: data });
-        } catch {
-            console.log('catching error');
-            res.status(500).json({message: "There was an error and we could not complete your request."});
+        } catch (error) {
+            res.status(500).json({message: "There was an error and we could not complete your request. Error: "+ error});
         }
     } else if (method == "PUT"){
         try{
