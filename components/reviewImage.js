@@ -8,7 +8,10 @@ export default function ReviewImage({title, subText, review_id}) {
   const [hover, setHover] = useState(false);
 
   const textBox = (
-  <div className={styles.textBox} >
+  <div 
+    className={styles.textBox} 
+    onClick={() => router.push(`/reviews/${review_id}`)}
+  >
     <h1>{title}</h1>
     <h1>{subText}</h1>
   </div>
@@ -27,7 +30,6 @@ export default function ReviewImage({title, subText, review_id}) {
           height="200" 
           src="/images/galit.jpeg" 
           alt={"Food"}
-          onClick={() => router.push(`/${review_id}`)}
       />
       {hover ? textBox : undefined}
     </div>
