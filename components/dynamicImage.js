@@ -1,21 +1,32 @@
-import styles from "./reviewImage.module.css";
+import styles from "./dynamicImage.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/router.js";
 
-export default function ReviewImage({title, subText, review_id}) {
+export default function DynamicImage({title, subText, id, reviewOrRecipe}) {
   const router = useRouter();
   const [hover, setHover] = useState(false);
 
-  const textBox = (
-  <div 
-    className={styles.textBox} 
-    onClick={() => router.push(`/reviews/${review_id}`)}
-  >
-    <h1>{title}</h1>
-    <h1>{subText}</h1>
-  </div>
-  )
+  const textBox = reviewOrRecipe == "Review" 
+  ? (
+    <div 
+      className={styles.textBox} 
+      onClick={() => router.push(`/reviews/${id}`)}
+    >
+      <h1>{title}</h1>
+      <h1>{subText}</h1>
+    </div>
+  ) 
+  : (
+    <div 
+      className={styles.textBox} 
+      onClick={() => router.push(`/recipes/${id}`)}
+    >
+      <h1>{title}</h1>
+      <h1>{subText}</h1>
+    </div>
+  ) 
+
 
   return (
     <div 

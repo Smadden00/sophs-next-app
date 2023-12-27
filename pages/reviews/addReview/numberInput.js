@@ -1,8 +1,8 @@
 import styles from "./addReview.module.css";
 
-export default function NumberInput({type, inputTitle, value, callback}) {
+export default function NumberInput({range, inputTitle, value, callback}) {
 
-    const input = type == 10 
+    const input = range == 10 
       ? <input 
           type="number" 
           value={value} 
