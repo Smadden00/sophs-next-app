@@ -1,6 +1,6 @@
 import styles from "./Reviews.module.css";
 import Header from "../../components/header";
-import ImageLink from "../../components/imageLink.js"
+import ReviewImage from "../../components/reviewImage";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
 
@@ -10,28 +10,25 @@ export default function Reviews() {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  const images = data.map((row, i) => <ImageLink title={row.rest_name} subText={row.o_rating} key={i}/>)
+  const reviewImages = data.map((reviewImageData, i) => <ReviewImage title={reviewImageData.rest_name} subText={reviewImageData.o_rating} review_id={reviewImageData.review_id} key={i} />);
 
   useEffect(() => {
-    console.log('in the use effect')
-    const fetchData = async () => {
+    const fetchReviews = async () => {
       try{
         const response = await fetch('/api/reviews');
         if (!response.ok) {
           throw new Error('Network response was not ok.');
         }
-        console.log('in page after response');
         const dataResponse = await response.json();
         const data = dataResponse.body.rows;
         setData(data);
         setLoading(false);
       } catch (error) {
-        console.log('caught an error in the page');
-        console.error('Error fetching reviews:', error);
+        console.error('Error fetching reviews: ', error);
       }
     };
 
-    fetchData();
+    fetchReviews();
   },[]);
 
   return (
@@ -65,7 +62,7 @@ export default function Reviews() {
         </div>
       </div>
       <div className={styles.content}>
-        {isLoading ? <h1>LOADING</h1> : images}
+        {isLoading ? <h1>LOADING</h1> : reviewImages}
       </div>
     </div>
 

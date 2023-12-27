@@ -2,7 +2,7 @@ import styles from "./Recipes.module.css";
 import Header from "../../components/header";
 import Image from "next/image";
 import { useState } from "react";
-import ImageLink from "../../components/imageLink.js"
+import ReviewImage from "../../components/reviewImage";
 
 export default function Recipes() {
 
@@ -11,7 +11,7 @@ export default function Recipes() {
 
   
   const list = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-  const images = list.map((num, i) => <ImageLink key={i}/>  )
+  const images = list.map((num, i) => <ReviewImage key={i}/>  )
 
   return (
     <>

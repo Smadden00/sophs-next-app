@@ -1,14 +1,17 @@
-import styles from "./imageLink.module.css";
+import styles from "./reviewImage.module.css";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/router.js";
 
-export default function ImageLink({title, subText}) {
-
+export default function ReviewImage({title, subText, review_id}) {
+  const router = useRouter();
   const [hover, setHover] = useState(false);
 
-
   const textBox = (
-  <div className={styles.textBox}>
+  <div 
+    className={styles.textBox} 
+    onClick={() => router.push(`/reviews/${review_id}`)}
+  >
     <h1>{title}</h1>
     <h1>{subText}</h1>
   </div>
