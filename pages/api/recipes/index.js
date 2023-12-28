@@ -33,8 +33,6 @@ export default async function handler(req, res){
 
             //Here, I build the value portion of the ingredients SQL put query (as a string) that will go into the database
             let ingredientValues = ""
-            console.log("this is ingredients")
-            console.log(ingredients);
             ingredients.forEach((ingredient, i) => {
                 if (i==0){
                     ingredientValues+=`(${recipe_id}, '${ingredient}')`
@@ -42,8 +40,6 @@ export default async function handler(req, res){
                     ingredientValues+=`, (${recipe_id}, '${ingredient}')`
                 }
             });
-            console.log("this is ingredientValues");
-            console.log(ingredientValues);
             const ingredientResponse = await pool.query(`INSERT INTO recipe_ingredients(recipe_id, ingredient) VALUES ${ingredientValues};`)
 
             res.status(200).json({message: [recipesResponse, instructionResponse, ingredientResponse], body: req.body})
