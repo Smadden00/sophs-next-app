@@ -1,35 +1,37 @@
 import styles from "./Reviews.module.css";
 import Header from "../../components/header";
-import ReviewImage from "../../components/reviewImage";
+import DynamicImage from "../../components/dynamicImage";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
 
-export default function Reviews() {
+export default function AddReview() {
   const router = useRouter();
-
-  const [data, setData] = useState([]);
+  const [reviewsData, setReviewsData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  const reviewImages = data.map((reviewImageData, i) => <ReviewImage title={reviewImageData.rest_name} subText={reviewImageData.o_rating} review_id={reviewImageData.review_id} key={i} />);
-
+  //Load in all the data
   useEffect(() => {
-    const fetchReviews = async () => {
+    const fetchAllReviews = async () => {
       try{
         const response = await fetch('/api/reviews');
         if (!response.ok) {
-          throw new Error('Network response was not ok.');
+          throw new Error('Error in fetching all reviews.');
         }
-        const dataResponse = await response.json();
-        const data = dataResponse.body.rows;
-        setData(data);
+        const javascriptResponse = await response.json();
+        const reviewsData = javascriptResponse.body.rows;
+        setReviewsData(reviewsData);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching reviews: ', error);
       }
     };
 
-    fetchReviews();
+    fetchAllReviews();
   },[]);
+
+
+  //build the images of each review
+  const reviewsImages = reviewsData.map((reviewData, i) => <DynamicImage title={reviewData.rest_name} subText={reviewData.o_rating} id={reviewData.review_id} reviewOrRecipe="Review" key={i} />);
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function Reviews() {
         </div>
       </div>
       <div className={styles.content}>
-        {isLoading ? <h1>LOADING</h1> : reviewImages}
+        {isLoading ? <h1>LOADING</h1> : reviewsImages}
       </div>
     </div>
 

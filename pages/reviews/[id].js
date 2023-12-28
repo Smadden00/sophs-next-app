@@ -5,20 +5,18 @@ import { useRouter } from "next/router";
 
 export default function Review() {
     const router = useRouter();
-    const { review_id } = router.query
+    const { id } = router.query
 
     const [reviewData, setReviewData] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const {rest_name, description, experience, o_rating, price, taste} = reviewData
 
-    console.log(reviewData)
-
+    //Fetch the review data
     useEffect(() => {
-        //This function fetches the review data
         const getReview = async () => {
             try {
-                const response = await fetch(`/api/reviews/${review_id}`);
+                const response = await fetch(`/api/reviews/${id}`);
                 if (!response.ok) {
                     throw new Error('Error while fetching the review data.');
                 }
@@ -43,7 +41,6 @@ export default function Review() {
             <div className={styles.titleContainer}>
                 <h1 className={styles.title}>Review of {rest_name}</h1>
             </div>
-
             <div className={styles.reviewContainer}>
                 <h1>Description: {description}</h1>
                 <p>Experience: {experience}</p>

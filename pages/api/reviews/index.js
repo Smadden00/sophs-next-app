@@ -11,7 +11,7 @@ export default async function handler(req, res){
             const data = await client.query('SELECT * FROM reviews;');
             res.status(200).json({ body: data });
         } catch (error) {
-            res.status(500).json({message: "There was an error and we could not complete your request. Error: "+ error});
+            res.status(500).json({message: "There was an error and we could not complete your get all reviews request. Error: "+ error});
         }
     } else if (method == "PUT"){
         try{
@@ -19,7 +19,7 @@ export default async function handler(req, res){
             const response = await pool.query(`INSERT INTO reviews(rest_name, o_rating, price, taste, experience, description, user_id_submitted, soph_submitted) VALUES ('${rest_name}', ${o_rating}, ${price}, ${taste}, ${experience}, '${description}', '1', FALSE);`);
             res.status(200).json({message: response, body: req.body})
         } catch {
-            res.status(500).json({message: "There was an error and we could not insert your data.", })
+            res.status(500).json({message: "There was an error and we could not insert your review data.", })
         }
     }
 
