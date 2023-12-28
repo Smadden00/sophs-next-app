@@ -7,7 +7,7 @@ export default function Recipe() {
     const router = useRouter();
     const { id } = router.query
 
-    const [recipeData, setRecipeData] = useState([]);
+    const [recipeData, setRecipeData] = useState({});
     const [loading, setLoading] = useState(true);
 
     const {recipe_name, ingredients, prep_time, rating, meal, instructions} = recipeData
@@ -33,6 +33,8 @@ export default function Recipe() {
         getRecipe();
     }, []);
 
+    const ingredientsListItems = !Array.isArray(ingredients) ? undefined : ingredients.map((ingredient) => <li>{ingredient}</li>);
+    const instructionsListItems = !Array.isArray(instructions) ? undefined : instructions.map((instruction, i) => <li>Step {i+1}: {instruction}</li>);
 
   return (
     <>
@@ -42,11 +44,13 @@ export default function Recipe() {
                 <h1 className={styles.title}>{recipe_name}</h1>
             </div>
             <div className={styles.reviewContainer}>
-                <p>Ingredients: {ingredients}</p>
+                <p>Ingredients:</p>
+                <ul>{ingredientsListItems}</ul>
                 <p>Meal: {meal}</p>
                 <p>Prep Time: {prep_time}</p>
                 <p>Rating: {rating}</p>
-                <p>Instructions: {instructions}</p>
+                <p>Instructions:</p>
+                <ul>{instructionsListItems}</ul>
             </div>
         </div>
     </>

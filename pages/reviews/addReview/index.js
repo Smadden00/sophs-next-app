@@ -1,8 +1,8 @@
 import Header from "../../../components/header";
 import { useState } from "react";
 import styles from "./addReview.module.css";
-import TextInput from "./textInput";
-import NumberInput from "./numberInput";
+import TextInput from "../../../components/textInput";
+import NumberInput from "../../../components/numberInput";
 import { useRouter } from "next/router";
 
 export default function Reviews() {

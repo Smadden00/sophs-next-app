@@ -4,7 +4,7 @@ import DynamicImage from "../../components/dynamicImage";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
 
-export default function Reviews() {
+export default function AddReview() {
   const router = useRouter();
   const [reviewsData, setReviewsData] = useState([]);
   const [isLoading, setLoading] = useState(true);

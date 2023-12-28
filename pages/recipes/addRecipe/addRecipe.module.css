@@ -42,11 +42,6 @@
     width: 320px;
 }
 
-.listContainer{
-    display: flex;
-    flex-direction: column;
-}
-
-.listButton{
-    width: 75px;
+.buttonContainer{
+    
 }
