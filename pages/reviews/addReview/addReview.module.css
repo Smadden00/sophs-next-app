@@ -68,8 +68,13 @@
     border-right: 2px solid #808275;
     margin-top: -6px;
     border-radius: 0 0 8px 8px;
-    padding: 0 4px 2px 4px;
+    padding: 2px 4px 2px 4px;
     color: var(--color7)
+}
+
+.cityOption{
+    padding: 3px;
+    border-radius: 2px;
 }
 
 .cityOptionHover {

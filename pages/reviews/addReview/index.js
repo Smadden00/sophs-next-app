@@ -45,7 +45,7 @@ export default function Reviews() {
             <div className={styles.inputsContainer}>
                 <TextInput inputTitle="Restaurant Name" value={restaurantName} callback={setRestaurantName} />
                 <DropdownInput title={"State"} list={state_codes} value={state} callback={setState}/>
-                <SearchCities cities={cities} value={city} callback={setCity}/>
+                <SearchCities cities={cities} currCityVal={city} currCityValCallback={setCity}/>
                 <NumberInput range={10} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} />
                 <NumberInput range={4} inputTitle="Price" value={price} callback={setPrice} />
                 <NumberInput range={10} inputTitle="Taste" value={taste} callback={setTaste} />
@@ -56,7 +56,7 @@ export default function Reviews() {
                 type="button" 
                 value="Submit Review"
                 onClick={() => {
-                    SendReview(router, restaurantName, overallRating, price, taste, experience, description);
+                    SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities);
                 }}
             />
         </div>

@@ -1,26 +1,27 @@
 import styles from "../pages/reviews/addReview/addReview.module.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SearchCityOption from "./searchCityOption";
 
-export default function SearchCities({cities, value, callback}) {
+export default function SearchCities({cities, currCityVal, currCityValCallback}) {
 
-    const [searching, setSearching] = useState(true);
     const [optionHover, setOptionHover] = useState(false);
+    const [currentlySearching, setCurrentlySearching] = useState(true);
 
-    const cityOptions = ['San Antonio', 'Valparaiso', 'Texas']
-    const cityOptionDivs = cityOptions.map((city)=> {
+    const filteredCities = cities.filter((indivCityInList) => indivCityInList.toLowerCase().includes(currCityVal.toLowerCase()));
+    const cityOptionDivs = filteredCities.map((filteredCity)=> {
         return (
-            <SearchCityOption city={city} callback={callback} />
+            <SearchCityOption city={filteredCity} currCityValCallback={currCityValCallback} searchingCallback={setCurrentlySearching} key={filteredCity}/>
         )});
 
+    useEffect(() => {
+        setCurrentlySearching(true);
+      },[currCityVal]);
 
-    const citiesListDropdown = searching
-        ? (
+    const citiesListDropdown = (
             <div className={styles.citiesSearchDropdown}>
                 {cityOptionDivs}
             </div>
-          )
-        : undefined;
+          );
 
 
   return (
@@ -29,10 +30,10 @@ export default function SearchCities({cities, value, callback}) {
         <div className={styles.citySearchContainer}>
             <textarea 
                 id="Cities"
-                value={value}
-                onChange={(e)=> callback(e.target.value)}
+                value={currCityVal}
+                onChange={(e)=> currCityValCallback(e.target.value)}
             />
-            {citiesListDropdown}
+            {currCityVal && currCityVal.length>1 && currentlySearching ? citiesListDropdown : undefined}
         </div>
     </div>
 )}

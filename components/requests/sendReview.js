@@ -1,20 +1,13 @@
 import HasSingleQuote from "../functions/hasSingleQuote";
+import SendReviewSafetyChecks from "../safetyChecks/sendReviewSafetyChecks";
 
-export default async function SendReview(router, restaurantName, overallRating, price, taste, experience, description) {
+export default async function SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities) {
         try {
-            //perform initial safety checks on the data that the client gave
-            if(            
-                restaurantName.trim() == '' &&
-                !(overallRating >= 0 && overallRating <= 10) &&
-                !(price >= 1 && price <= 4) &&
-                !(taste >= 0 && taste <= 10) &&
-                (!experience >= 0 && experience <= 10) &&
-                description.trim() == '' &&
-                HasSingleQuote(restaurantName) && 
-                HasSingleQuote(description)
-            ){
-                throw new Error('There is an error in the data that you input.')
+            const safetyResponse = SendReviewSafetyChecks(restaurantName, overallRating, price, taste, experience, description, city, cities);
+            if (safetyResponse != "No errors"){
+                throw new Error(safetyResponse)
             }
+            
             const response = await fetch('/api/reviews', {
                 method: 'PUT',
                 body: JSON.stringify({
@@ -24,6 +17,8 @@ export default async function SendReview(router, restaurantName, overallRating, 
                     taste: taste, 
                     experience: experience, 
                     description: description, 
+                    city: city,
+                    state_code: state,
                     user_id_submitted: 1, 
                     soph_submitted: false
                 })

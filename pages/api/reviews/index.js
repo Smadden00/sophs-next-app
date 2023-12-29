@@ -15,8 +15,8 @@ export default async function handler(req, res){
         }
     } else if (method == "PUT"){
         try{
-            const {rest_name, o_rating, price, taste, experience, description} = JSON.parse(req.body);
-            const response = await pool.query(`INSERT INTO reviews(rest_name, o_rating, price, taste, experience, description, user_id_submitted, soph_submitted) VALUES ('${rest_name}', ${o_rating}, ${price}, ${taste}, ${experience}, '${description}', '1', FALSE);`);
+            const {rest_name, o_rating, price, taste, experience, description, city, state_code} = JSON.parse(req.body);
+            const response = await pool.query(`INSERT INTO reviews(rest_name, o_rating, price, taste, experience, description, city, state_code, user_id_submitted, soph_submitted) VALUES ('${rest_name}', ${o_rating}, ${price}, ${taste}, ${experience}, '${description}', '${city}', '${state_code}', '1', FALSE);`);
             res.status(200).json({message: response, body: req.body})
         } catch {
             res.status(500).json({message: "There was an error and we could not insert your review data.", })
