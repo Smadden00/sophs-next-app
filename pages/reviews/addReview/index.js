@@ -4,11 +4,21 @@ import styles from "./addReview.module.css";
 import TextInput from "../../../components/textInput";
 import NumberInput from "../../../components/numberInput";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import DropdownInput from "../../../components/dropdownInput.js"
+import StateCodes from "../../../components/consts/state_codes.js";
+import SendReview from "../../../components/requests/SendReview.js";
+import FetchCities from "../../../components/requests/fetchCities.js";
+import SearchCities from "../../../components/searchCities.js";
 
 export default function Reviews() {
     const router = useRouter();
 
     const [restaurantName, setRestaurantName] = useState('');
+    const [state, setState] = useState('');
+    const [cities, setCities] = useState([]);
+    const [citiesLoading, setCitiesLoading] = useState(true);
+    const [city, setCity] = useState('')
     const [type, setType] = useState([]);
     const [overallRating, setOverallRating] = useState(0.0);
     const [price, setPrice] = useState(1);
@@ -16,51 +26,14 @@ export default function Reviews() {
     const [experience, setExperience] = useState(0.0);
     const [description, setDescription] = useState('');
 
-    //This function sends the put request
-    const sendReview = async (restaurantName, overallRating, price, taste, experience, description) => {
-        try {
-            //perform initial safety checks on the data that the client gave
-            if(            
-                restaurantName.trim() == '' &&
-                !(overallRating >= 0 && overallRating <= 10) &&
-                !(price >= 1 && price <= 4) &&
-                !(taste >= 0 && taste <= 10) &&
-                (!experience >= 0 && experience <= 10) &&
-                description.trim() == '' &&
-                hasSingleQuote(restaurantName) && 
-                hasSingleQuote(description)
-            ){
-                throw new Error('There is an error in the data that you input.')
-            }
-            const response = await fetch('/api/reviews', {
-                method: 'PUT',
-                body: JSON.stringify({
-                    rest_name: restaurantName,
-                    o_rating: overallRating, 
-                    price: price, 
-                    taste: taste, 
-                    experience: experience, 
-                    description: description, 
-                    user_id_submitted: 1, 
-                    soph_submitted: false
-                })
-            });
-            if (!response.ok) {
-                throw new Error('Could not make put request.');
-            }
+    const state_codes=StateCodes();
 
-            //if there are no errors, send the user back to the reviews page
-            router.push('/reviews');
-        } catch (error) {
-            console.log('caught an error in the put request');
-            console.error('Error sending the new review:', error);    
+    useEffect(() => {
+        if(state!==''){
+            setCitiesLoading(true);
+            FetchCities(state, setCities, setCitiesLoading);
         }
-    };
-
-    //this is used to ensure that there are no single quotes in a given string
-    const hasSingleQuote = (string) => {
-        return /'/g.test(string);
-    }
+      },[state]);
 
   return (
     <>
@@ -71,6 +44,8 @@ export default function Reviews() {
             </div>
             <div className={styles.inputsContainer}>
                 <TextInput inputTitle="Restaurant Name" value={restaurantName} callback={setRestaurantName} />
+                <DropdownInput title={"State"} list={state_codes} value={state} callback={setState}/>
+                <SearchCities cities={cities} value={city} callback={setCity}/>
                 <NumberInput range={10} inputTitle="Overall Rating" value={overallRating} callback={setOverallRating} />
                 <NumberInput range={4} inputTitle="Price" value={price} callback={setPrice} />
                 <NumberInput range={10} inputTitle="Taste" value={taste} callback={setTaste} />
@@ -81,7 +56,7 @@ export default function Reviews() {
                 type="button" 
                 value="Submit Review"
                 onClick={() => {
-                    sendReview(restaurantName, overallRating, price, taste, experience, description);
+                    SendReview(router, restaurantName, overallRating, price, taste, experience, description);
                 }}
             />
         </div>

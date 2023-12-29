@@ -1,6 +1,6 @@
 import Header from "../../components/header";
 import { useState, useEffect } from "react";
-import styles from "./addRecipe/addRecipe.module.css";
+import styles from "./Recipe.module.css";
 import { useRouter } from "next/router";
 
 export default function Recipe() {
@@ -36,22 +36,36 @@ export default function Recipe() {
     const ingredientsListItems = !Array.isArray(ingredients) ? undefined : ingredients.map((ingredient) => <li>{ingredient}</li>);
     const instructionsListItems = !Array.isArray(instructions) ? undefined : instructions.map((instruction, i) => <li>Step {i+1}: {instruction}</li>);
 
-  return (
-    <>
-        <Header />
-        <div className={styles.container}>
-            <div className={styles.titleContainer}>
-                <h1 className={styles.title}>{recipe_name}</h1>
-            </div>
-            <div className={styles.reviewContainer}>
-                <p>Ingredients:</p>
-                <ul>{ingredientsListItems}</ul>
-                <p>Meal: {meal}</p>
-                <p>Prep Time: {prep_time}</p>
-                <p>Rating: {rating}</p>
-                <p>Instructions:</p>
-                <ul>{instructionsListItems}</ul>
-            </div>
-        </div>
-    </>
-)}
+    if (loading){
+        return (
+            <>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}>LOADING</h1>
+                    </div>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}>{recipe_name}</h1>
+                        <div className={styles.subTitleContainer}>
+                            <p>{meal}</p>
+                            <p>Prep Time: {prep_time}</p>
+                            <p>Rating</p>
+                        </div>
+                    </div>
+                    <div className={styles.reviewContainer}>
+                        <p>Ingredients:</p>
+                        <ul>{ingredientsListItems}</ul>
+                        <p>Instructions:</p>
+                        <ul>{instructionsListItems}</ul>
+                    </div>
+                </div>
+            </>
+)}}

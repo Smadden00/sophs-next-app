@@ -9,6 +9,9 @@ export default function Recipes() {
   const [recipesData, setRecipesData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  console.log("This is is loading");
+  console.log(isLoading);
+
   //Load in all the data
   useEffect(() => {
     const fetchAllRecipes = async () => {

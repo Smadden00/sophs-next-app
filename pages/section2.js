@@ -101,11 +101,8 @@ export default function Section2() {
           </div>
         </div>
         <div className={styles.section2Text}>
-          <h1>Your next culinary adventure awaits...</h1>
+          <h1>Find recipes and restaurant reviews from Sophia and the community...</h1>
         </div>
-      </div>
-      <div className={styles.section2Foreground}>
-        <h1>Your next culinary adventure awaits...</h1>
       </div>
     </div>
 )}

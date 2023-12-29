@@ -50,3 +50,28 @@
 .listButton{
     width: 75px;
 }
+
+.stateDropdown{
+    width: auto;
+}
+
+.citySearchContainer{
+    position: relative;
+}
+
+.citiesSearchDropdown{
+    position: absolute;
+    width: 100%;
+    background-color: #646652;
+    border-left: thin solid #808275;
+    border-bottom: 2px solid #808275;
+    border-right: 2px solid #808275;
+    margin-top: -6px;
+    border-radius: 0 0 8px 8px;
+    padding: 0 4px 2px 4px;
+    color: var(--color7)
+}
+
+.cityOptionHover {
+    background-color: #4e94e9;
+}

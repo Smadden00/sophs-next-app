@@ -20,7 +20,7 @@ export default function Section4() {
               alt={"Food"}
           />
           <div className={styles.section4TextContainer}>
-            <Link className="link" href={{pathname: '/reviews'}}><h1 className={styles.section4Text}>Browse Community Reviews</h1></Link>
+            <Link className="link" href={{pathname: '/reviews'}}><h1 className={styles.section4Text}>Browse Community Restaurant Reviews</h1></Link>
           </div>
         </div>
         <div className={styles.section4ImageContainer}>

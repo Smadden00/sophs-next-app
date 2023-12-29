@@ -1,7 +1,10 @@
 import Header from "../../components/header";
 import { useState, useEffect } from "react";
-import styles from "./addReview/addReview.module.css";
+import styles from "./Review.module.css";
 import { useRouter } from "next/router";
+import BuildPriceSigns from "../../components/functions/buildPriceSigns";
+import ReviewGraph from "../../components/reviewGraph"
+import GetReview from "../../components/requests/getReview";
 
 export default function Review() {
     const router = useRouter();
@@ -14,40 +17,45 @@ export default function Review() {
 
     //Fetch the review data
     useEffect(() => {
-        const getReview = async () => {
-            try {
-                const response = await fetch(`/api/reviews/${id}`);
-                if (!response.ok) {
-                    throw new Error('Error while fetching the review data.');
-                }
-                const {body: [reviewData]} = await response.json();
-                //if there are no errors, send the user to the reviews page
-                setReviewData(reviewData);
-                setLoading(false)
-            } catch (error) {
-                console.log('caught an error while fetching the review data');
-                console.error('Error:', error);    
-            }
-        };
-
-        getReview();
+        GetReview(id, setReviewData, setLoading);
     }, []);
 
-
-  return (
-    <>
-        <Header />
-        <div className={styles.container}>
-            <div className={styles.titleContainer}>
-                <h1 className={styles.title}>Review of {rest_name}</h1>
-            </div>
-            <div className={styles.reviewContainer}>
-                <h1>Description: {description}</h1>
-                <p>Experience: {experience}</p>
-                <p>Overall Rating: {o_rating}</p>
-                <p>Price: {price}</p>
-                <p>Taste: {taste}</p>
-            </div>
-        </div>
-    </>
-)}
+    if (loading){
+        return (
+            <>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}>LOADING</h1>
+                    </div>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <Header />
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h1 className={styles.title}>{rest_name}</h1>
+                        <div className={styles.subTitleContainer}>
+                            <p>Location</p>
+                            <p>{BuildPriceSigns(price)}</p>
+                            <p>Cuisines</p>
+                        </div>
+                    </div>
+                    <div className={styles.reviewSectionContainer}>
+                        <h1>Average of Reviews</h1>
+                        <div className={styles.reviewChartContainer}>
+                            <ReviewGraph o_rating={o_rating} experience={experience} taste={taste} />
+                        </div>
+                    </div>
+                    <div className={styles.reviewSectionContainer}>
+                        <h1>Descriptions</h1>
+                        <p>Description: {description}</p>
+                    </div>
+                </div>
+            </>
+        )    
+    }
+}

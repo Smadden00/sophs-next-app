@@ -1,8 +1,9 @@
 import styles from "./Reviews.module.css";
 import Header from "../../components/header";
-import DynamicImage from "../../components/dynamicImage";
+import ReviewCard from "../../components/reviewCard";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
+import FetchAllReviews from "../../components/requests/fetchAllReviews";
 
 export default function AddReview() {
   const router = useRouter();
@@ -11,27 +12,12 @@ export default function AddReview() {
 
   //Load in all the data
   useEffect(() => {
-    const fetchAllReviews = async () => {
-      try{
-        const response = await fetch('/api/reviews');
-        if (!response.ok) {
-          throw new Error('Error in fetching all reviews.');
-        }
-        const javascriptResponse = await response.json();
-        const reviewsData = javascriptResponse.body.rows;
-        setReviewsData(reviewsData);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching reviews: ', error);
-      }
-    };
-
-    fetchAllReviews();
+    FetchAllReviews(setReviewsData, setLoading);
   },[]);
 
 
   //build the images of each review
-  const reviewsImages = reviewsData.map((reviewData, i) => <DynamicImage title={reviewData.rest_name} subText={reviewData.o_rating} id={reviewData.review_id} reviewOrRecipe="Review" key={i} />);
+  const reviewsImages = reviewsData.map((reviewData, i) => <ReviewCard title={reviewData.rest_name} rating={reviewData.o_rating} price={reviewData.price} id={reviewData.review_id} key={i} />);
 
   return (
     <>
