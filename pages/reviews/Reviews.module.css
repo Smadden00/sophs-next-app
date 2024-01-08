@@ -17,11 +17,11 @@
 }
 
 .titleContainer {
-  width: 25%;
   height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
 .title {
@@ -30,12 +30,12 @@
 }
 
 .addContainer {
-  width: 15%;
   height: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
 .addButton{
@@ -72,19 +72,6 @@
 }
 
 /************************
-Add Reviews
-*************************/
-
-.addAReviewContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-height: 78vh;
-  color: var(--color2)
-}
-
-/************************
 Filters
 *************************/
 
@@ -92,7 +79,9 @@ Filters
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 15px;
+  flex: 1;
 }
 
 .filtersContainer{

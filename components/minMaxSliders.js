@@ -9,6 +9,7 @@ export default function MinMaxSliders({lowerVal, setLowerVal, upperVal, setUpper
             <p>Min: </p>
             <input
                 type="range"
+                className={styles.slider}
                 min={min}
                 max={max}
                 step={step}
@@ -24,6 +25,7 @@ export default function MinMaxSliders({lowerVal, setLowerVal, upperVal, setUpper
             <p>Max: </p>
             <input
                 type="range"
+                className={styles.slider}
                 min={min}
                 max={max}
                 step={step}
