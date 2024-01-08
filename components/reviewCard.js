@@ -23,10 +23,10 @@ export default function ReviewCard({title, location, cuisine, price, rating, id}
             onClick={() => router.push(`/reviews/${id}`)}
         >
             <p className={styles.title}>{title}</p>
-            <p>{location}</p>
+            <p>Rating: {rating} / 10</p>
+            <p>Price: {priceSigns}</p>
             <p>{cuisine}</p>
-            <p>{priceSigns}</p>
-            <p>{rating}/10</p>
+            <p>{location}</p>
         </div>
     </div>
 )}
