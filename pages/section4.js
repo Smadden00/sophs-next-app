@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Section4() {
 
+  //These images should be 400x700
 
   return (
     <div className={styles.section4}>

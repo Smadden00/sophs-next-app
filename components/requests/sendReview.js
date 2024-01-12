@@ -5,7 +5,7 @@ export default async function SendReview(router, restaurantName, overallRating, 
         try {
             const safetyResponse = SendReviewSafetyChecks(restaurantName, overallRating, price, taste, experience, description, city, cities);
             if (safetyResponse != "No errors"){
-                throw new Error(safetyResponse)
+                throw new Error(safetyResponse);
             }
             
             const response = await fetch('/api/reviews', {
@@ -30,7 +30,6 @@ export default async function SendReview(router, restaurantName, overallRating, 
             //if there are no errors, send the user back to the reviews page
             router.push('/reviews');
         } catch (error) {
-            console.log('caught an error in the put request');
             console.error('Error sending the new review:', error);    
         }
     };

@@ -10,45 +10,45 @@ export default function Section2() {
           <div className={`${styles.section2Image}`} >
             <Image 
               className={styles.image}
+              src="/images/smallImgs/soph.jpg"
+              width={194}
               height={200}
+              alt={"Food"}
+            />
+          </div>
+          <div className={`${styles.section2Image}`} >
+            <Image 
+              className={styles.image}
               width={200}
-              src="/images/galit.jpeg"
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image}`} >
             <Image 
               className={styles.image}
-              height={200}
+              width={210}
+              height={215}
+              src="/images/smallImgs/pizza.jpg"
+              alt={"Food"}
+            />
+          </div>
+          <div className={`${styles.section2Image}`} >
+            <Image 
+              className={styles.image}
               width={200}
-              src="/images/mountainSandwich.jpeg"
+              height={199}
+              src="/images/smallImgs/salad.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image}`} >
             <Image 
               className={styles.image}
-              height={250}
-              width={250}
-              src="/images/duckDuckGoat.jpeg"
-              alt={"Food"}
-            />
-          </div>
-          <div className={`${styles.section2Image}`} >
-            <Image 
-              className={styles.image}
-              height={150}
-              width={150}
-              src="/images/sophsLogo.png"
-              alt={"Food"}
-            />
-          </div>
-          <div className={`${styles.section2Image}`} >
-            <Image 
-              className={styles.image}
-              height={200}
               width={200}
-              src="/images/sophsLogo.png"
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>
@@ -57,45 +57,45 @@ export default function Section2() {
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              height={250}
-              width={250}
-              src="/images/duckDuckGoat.jpeg"
+              width={230}
+              height={229}
+              src="/images/smallImgs/spread.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              height={200}
               width={200}
-              src="/images/galit.jpeg"
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              height={250}
-              width={250}
-              src="/images/duckDuckGoat.jpeg"
+              width={200}
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              height={300}
-              width={300}
-              src="/images/mountainSandwich.jpeg"
+              width={200}
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>
           <div className={`${styles.section2Image2}`} >
             <Image 
               className={styles.image}
-              height={175}
-              width={175}
-              src="/images/duckDuckGoat.jpeg"
+              width={200}
+              height={213}
+              src="/images/smallImgs/biscuit.jpg"
               alt={"Food"}
             />
           </div>

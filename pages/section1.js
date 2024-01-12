@@ -3,6 +3,7 @@ import Link from "next/link"
 import Image from 'next/image';
 
 export default function Section1() {
+
   return (
     <div className={styles.section1}>
         <div className={styles.section1TitleContainer}>
@@ -29,8 +30,17 @@ export default function Section1() {
                     width={350}
                     src="/images/sophsLogo.png"
                     alt={"Food"}
-                />
+                /> 
             </div>
         </div>
     </div>
 )}
+
+/*
+                <Image 
+                    className={styles.image}
+                    height={350}
+                    width={350}
+                    src="/images/sophsLogo.png"
+                    alt={"Food"}
+                />*/
