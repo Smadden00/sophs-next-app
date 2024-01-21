@@ -9,6 +9,6 @@ export default function Profile() {
   return (
     <>
         <Header />
-        {session ? <LoggedInProfileBody /> : <LogInBody page={"view your profile"}/>}
+        {session ? <LoggedInProfileBody /> : <LogInBody pagePurpose={"view your profile"}/>}
     </>
 )}

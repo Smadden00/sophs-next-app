@@ -1,5 +1,3 @@
-import Encrypt from "../functions/encrypt";
-
 export default async function FetchProfileReviews(dataCallback, loadingCallback) {
     try{      
       const response = await fetch(`/api/reviews/profileReviews`);

@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import styles from "./profile.module.css";
 import { useSession } from "next-auth/react"
 import ProfileReviewTable from "../../components/reviewComponents/profileReviewTable";
+import ProfileRecipesTable from "../../components/reviewComponents/profileRecipesTable";
 import FetchProfileReviews from "../../components/requests/fetchProfileReviews";
+import FetchProfileRecipes from "../../components/requests/fetchProfileRecipes";
 import { useRouter } from "next/router";
 
 export default function LoggedInProfileBody({}) {
@@ -13,9 +15,13 @@ export default function LoggedInProfileBody({}) {
     const [profileRestReviewsData, setProfileRestReviewsData] = useState();
     const [profileRestReviewsLoading, setProfileRestReviewsLoading] = useState(true);
 
+    const [profileRecipesData, setProfileRecipesData] = useState();
+    const [profileRecipesLoading, setProfileRecipesLoading] = useState(true);
+
     useEffect(() => {
         if (session){
             FetchProfileReviews(setProfileRestReviewsData, setProfileRestReviewsLoading);
+            FetchProfileRecipes(setProfileRecipesData, setProfileRecipesLoading)
         }
     }, [session])
 
@@ -29,7 +35,10 @@ export default function LoggedInProfileBody({}) {
 
                 <div className={styles.contentContainer}>
                     <div className={styles.content}>
-                        <ProfileReviewTable data={profileRestReviewsData} profileRestReviewsLoading={profileRestReviewsLoading}/>
+                        <ProfileReviewTable profileRestReviewsData={profileRestReviewsData} profileRestReviewsLoading={profileRestReviewsLoading}/>
+                    </div>
+                    <div className={styles.content}>
+                        <ProfileRecipesTable profileRecipesData={profileRecipesData} profileRecipesLoading={profileRecipesLoading} />
                     </div>
                 </div>
 

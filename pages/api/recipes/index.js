@@ -2,6 +2,9 @@
 This function will handle the get all recipes and put recipe calls
 */
 import pool from "../../../backend-utils";
+import Encrypt from "../../../components/functions/encrypt";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req, res){
     const method = req.method;
@@ -15,8 +18,16 @@ export default async function handler(req, res){
         }
     } else if (method == "PUT"){
         try{
+
+            //ensure the user is authorized to make a put request then encrypt the user identifier
+            const session = await getServerSession(req, res, authOptions);
+            if (!session) {
+                return res.status(500).json({ message: 'The request was unauthorized' });
+            }
+            const user_encrypted = Encrypt(session.user.email)
+            
             const {recipe_name, ingredients, prep_time, rating, meal, instructions} = JSON.parse(req.body);
-            const recipesResponse = await pool.query(`INSERT INTO recipes(recipe_name, prep_time, rating, meal, user_id_submitted) VALUES ('${recipe_name}', ${prep_time}, ${rating}, '${meal}', '1') RETURNING recipe_id;`);
+            const recipesResponse = await pool.query(`INSERT INTO recipes(recipe_name, prep_time, rating, meal, user_encrypted) VALUES ('${recipe_name}', ${prep_time}, ${rating}, '${meal}', '${user_encrypted}') RETURNING recipe_id;`);
 
             const [{recipe_id}] = recipesResponse.rows
             

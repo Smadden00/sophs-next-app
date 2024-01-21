@@ -7,9 +7,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req, res){
-
     const method = req.method;
-      
     if (method == "GET"){
         try{
             const client = await pool.connect()
@@ -26,7 +24,7 @@ export default async function handler(req, res){
             if (!session) {
                 return res.status(500).json({ message: 'The request was unauthorized' });
             }
-
+            //encrypt the user identifier
             const user_encrypted = Encrypt(session.user.email)
 
             const {rest_name, o_rating, price, taste, experience, description, city, state_code} = JSON.parse(req.body);
