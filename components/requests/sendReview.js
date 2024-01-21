@@ -1,4 +1,3 @@
-import HasSingleQuote from "../functions/hasSingleQuote";
 import SendReviewSafetyChecks from "../safetyChecks/sendReviewSafetyChecks";
 
 export default async function SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities) {
@@ -19,11 +18,11 @@ export default async function SendReview(router, restaurantName, overallRating, 
                     description: description, 
                     city: city,
                     state_code: state,
-                    user_id_submitted: 1, 
                     soph_submitted: false
                 })
             });
             if (!response.ok) {
+                console.log("in send review error")
                 throw new Error('Could not make put request.');
             }
 

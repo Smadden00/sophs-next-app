@@ -10,7 +10,6 @@ import SendReview from "../../../components/requests/SendReview.js";
 import FetchCities from "../../../components/requests/fetchCities.js";
 import SearchCities from "../../../components/searchCities.js";
 
-
 export default function AddReviewBody() {
     const router = useRouter();
 

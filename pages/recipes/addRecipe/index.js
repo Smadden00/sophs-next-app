@@ -10,6 +10,6 @@ export default function AddRecipe() {
   return (
     <>
         <Header />
-        {session ? <AddRecipeBody /> : <LogInBody page={"recipe"}/>}
+        {session ? <AddRecipeBody /> : <LogInBody pagePurpose={"add a recipe"}/>}
     </>
 )}
