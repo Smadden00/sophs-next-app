@@ -11,7 +11,7 @@ export default function ProfileRecipesTable({profileRecipesData, profileRecipesL
         : (
             <tbody>
                     {profileRecipesData.map((item, index) => (
-                        <tr className={styles.tableItem} key={index} onClick={() => router.push(`/recipes/${item.recipe_id}`)}>
+                        <tr className={styles.tableItem} key={"recipe"+index} onClick={() => router.push(`/recipes/${item.recipe_id}`)}>
                             <td>{item.recipe_name}</td>
                             <td>{item.rating}</td>
                         </tr>

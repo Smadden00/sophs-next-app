@@ -3,10 +3,12 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin: auto;
     min-height: 78vh;
     color: var(--color2);
     padding-left: 5%;
     padding-right: 5%;
+    background-color: var(--color4);
 } 
 
 .titleContainer {
@@ -22,62 +24,28 @@
     color: var(--color2)
 }
 
+/*
+Inputs
+*/
 .inputsContainer{
     width: 100%;
-    background-color: lightgoldenrodyellow;
     display: flex;
+    background-color: var(--color7);
     flex-direction: column;
     justify-content: flex-start;
+    border-radius: 30px;
+    padding: 30px;
 }
 
-.inputBox{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    font-size: 20px;
+.firstSectionHeader{
+    margin: 0;
 }
 
-.inputTitle{
-    width: 320px;
+.secondSectionHeader{
+    margin: 0;
+    padding-top: 50px;
 }
 
-.listContainer{
-    display: flex;
-    flex-direction: column;
+.sectionHeader:nth-child(2) {
+    padding-top: 100px;
 }
-
-.listButton{
-    width: 75px;
-}
-
-.stateDropdown{
-    width: auto;
-}
-
-.citySearchContainer{
-    position: relative;
-}
-
-.citiesSearchDropdown{
-    position: absolute;
-    width: 100%;
-    background-color: #646652;
-    border-left: thin solid #808275;
-    border-bottom: 2px solid #808275;
-    border-right: 2px solid #808275;
-    margin-top: -6px;
-    border-radius: 0 0 8px 8px;
-    padding: 2px 4px 2px 4px;
-    color: var(--color7)
-}
-
-.cityOption{
-    padding: 3px;
-    border-radius: 2px;
-}
-
-.cityOptionHover {
-    background-color: #4e94e9;
-}
-

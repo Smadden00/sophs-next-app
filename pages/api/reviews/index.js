@@ -1,22 +1,22 @@
 /*
 This function will handle the get all reviews and put review
 */
-import pool from "../../../backend-utils";
-import Encrypt from "../../../components/functions/encrypt";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
+import pool from '../../../backend-utils';
+import Encrypt from '../../../components/functions/encrypt';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(req, res){
     const method = req.method;
-    if (method == "GET"){
+    if (method == 'GET'){
         try{
             const client = await pool.connect()
             const data = await client.query('SELECT * FROM reviews;');
             res.status(200).json({ body: data });
         } catch (error) {
-            res.status(500).json({message: "There was an error and we could not complete your get all reviews request. Error: "+ error});
+            res.status(500).json({message: 'There was an error and we could not complete your get all reviews request. Error: '+ error});
         }
-    } else if (method == "PUT"){
+    } else if (method == 'PUT'){
         try{
 
             //ensure the user is authorized to make a put request

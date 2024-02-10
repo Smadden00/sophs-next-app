@@ -1,13 +1,15 @@
-import styles from "../../pages/reviews/Reviews.module.css"
+import styles from './filters.module.css'
 import { useState, useEffect } from "react"
-import SearchCityOption from "../searchCityOption";
-import FiltersDropdown from "./filtersDropdown";
+import ReviewFiltersDropdown from "./reviewFiltersDropdown";
+import RecipeFiltersDropdown from "./recipeFiltersDropdown";
 
-export default function FiltersButton({filterValuesAndCallbacks}) {
+export default function FiltersButton({filterValuesAndCallbacks, isReview}) {
 
     const [showDropdown, setShowDropdown] = useState(false);
 
-  return (
+    const dropdown = isReview ? <ReviewFiltersDropdown filterValuesAndCallbacks={filterValuesAndCallbacks} setShowDropdown={setShowDropdown}/> : <RecipeFiltersDropdown filterValuesAndCallbacks={filterValuesAndCallbacks} setShowDropdown={setShowDropdown}/>;
+  
+    return (
     <div className={styles.filtersContainer}>
         <div className={styles.filterButtonContainer} onClick={()=> setShowDropdown(!showDropdown)}>
             <div className={styles.filterButton}>
@@ -17,6 +19,6 @@ export default function FiltersButton({filterValuesAndCallbacks}) {
                 </svg>
             </div>
         </div>
-        {showDropdown ? <FiltersDropdown filterValuesAndCallbacks={filterValuesAndCallbacks} setShowDropdown={setShowDropdown}/> : undefined}
+        {showDropdown ? dropdown : undefined}
     </div>
 )}

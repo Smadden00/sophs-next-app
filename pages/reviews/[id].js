@@ -4,7 +4,7 @@ import styles from "./Review.module.css";
 import { useRouter } from "next/router";
 import BuildPriceSigns from "../../components/functions/buildPriceSigns";
 import ReviewGraph from "../../components/reviewGraph"
-import GetReview from "../../components/requests/getReview";
+import FetchReview from "../../components/requests/fetchReview";
 
 export default function Review() {
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function Review() {
 
     //Fetch the review data
     useEffect(() => {
-        GetReview(id, setReviewData, setLoading);
+        FetchReview(id, setReviewData, setLoading);
     }, []);
 
     if (loading){

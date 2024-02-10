@@ -1,55 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./addRecipe.module.css";
-import TextInput from "../../../components/textInput";
-import NumberInput from "../../../components/numberInput";
-import ListInput from "../../../components/listInput";
+import TextInput from "../../../components/adding/textInput";
+import NumberInput from "../../../components/adding/numberInput";
+import ListInput from "../../../components/adding/listInput";
 import { useRouter } from "next/router";
+import SendRecipe from "../../../components/requests/sendRecipe";
+import FileInput from "../../../components/adding/fileInput"
+import PrepTimeInput from "../../../components/adding/prepTimeInput";
+import DropdownInput from "../../../components/adding/dropdownInput";
+import AddingError from "../../../components/adding/addingError";
 
 export default function AddRecipeBody() {
     const router = useRouter();
 
+    const [uploading, setUploading] = useState(false);
     const [recipeName, setRecipeName] = useState('');
     const [ingredients, setIngredients] = useState([]);
-    const [prepTime, setPrepTime] = useState(0);
-    const [rating, setRating] = useState(0);
+    const [totalPrepTimeInMin, setTotalPrepTimeInMin] = useState(0);
+    const [rating, setRating] = useState('');
     const [meal, setMeal] = useState('');
     const [instructions, setInstructions] = useState([]);
-    const [imageFile, setImageFile] = useState(undefined)
-
-    //This function sends the put request
-    const sendReview = async (recipeName, ingredients, prepTime, rating, meal, instructions) => {
-        try {
-            //perform initial safety checks on the data that the client gave
-            if(            
-                false
-            ){
-                throw new Error('There is an error in the data that you input.')
-            }
-
-            //send the put request
-            const response = await fetch('/api/recipes', {
-                method: 'PUT',
-                body: JSON.stringify({
-                    recipe_name: recipeName,
-                    ingredients: ingredients, 
-                    prep_time: prepTime, 
-                    rating: rating, 
-                    meal: meal, 
-                    instructions: instructions, 
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Could not make put request.');
-            }
-
-            //if there are no errors, send the user back to the recipes page
-            router.push('/recipes');
-        } catch (error) {
-            console.log('caught an error in the put request');
-            console.error('Error sending the new review:', error);    
-        }
-    };
+    const [imageFile, setImageFile] = useState(undefined);
+    const [inputError, setInputError] = useState(null);
 
     //This function handles the image save
     const handleFileChange = (event) => {
@@ -57,14 +29,35 @@ export default function AddRecipeBody() {
         if (file) {
           if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type ==='image/jpg') {
             setImageFile(file);
-            // You can then upload the file or do something else with it
           } else {
             alert('Please only upload png or jpg images.');
           }
         }
       };
-    
 
+    // Scroll to the top when inputError is not null
+    useEffect(() => {
+      if (inputError) {
+          window.scrollTo(0, 0);
+      }
+    }, [inputError]);
+    
+      const errorAlert = inputError ? <AddingError error={inputError} setInputError={setInputError} /> : null;
+
+  if (uploading){
+    return (
+      <div className={styles.container}>
+        <div className={styles.titleContainer}>
+          <h1 className={`${styles.title} ${styles.uploadingTitle}`}>
+            Uploading
+            <span className={styles.dot}>.</span>
+            <span className={styles.dot}>.</span>
+            <span className={styles.dot}>.</span>
+          </h1>
+        </div>
+      </div>
+    )
+  } else {
   return (
         <div className={styles.container}>
             <div className={styles.titleContainer}>
@@ -72,19 +65,23 @@ export default function AddRecipeBody() {
             </div>
             <div className={styles.inputsContainer}>
                 <TextInput inputTitle="Recipe Name" value={recipeName} callback={setRecipeName} />
-                <NumberInput range={100} inputTitle="Prep Time" value={prepTime} callback={setPrepTime} />
-                <NumberInput range={10} inputTitle="Rating" value={rating} callback={setRating} />
-                <TextInput inputTitle="Meal" value={meal} callback={setMeal} />
-                <ListInput inputTitle="Ingredients" array={ingredients} callback={setIngredients}/>
-                <ListInput inputTitle="Instructions" array={instructions} callback={setInstructions}/>
-                <input type="file" accept=".png, .jpg, .jpeg" onChange={handleFileChange} />
+                <NumberInput type={'Rating 1-10'} inputTitle="Rating" value={rating} callback={setRating} subtext={"1-10"}/>
+                <DropdownInput title="Meal" list={['Breakfast', 'Brunch', 'Lunch', 'Dinner', 'Snack', 'Dessert']} value={meal} callback={setMeal} />
+                <PrepTimeInput setTotalPrepTimeInMin={setTotalPrepTimeInMin} />
+                <ListInput listTitle="Ingredients" array={ingredients} callback={setIngredients}/>
+                <ListInput listTitle="Instructions" array={instructions} callback={setInstructions}/>
+                <FileInput handleFileChange={handleFileChange} />
             </div>
             <input 
                 type="button" 
                 value="Submit Recipe"
+                style={{margin: '10px'}}
                 onClick={() => {
-                    sendReview(recipeName, ingredients, prepTime, rating, meal, instructions);
+                  SendRecipe(router, recipeName, ingredients, totalPrepTimeInMin, rating, meal, instructions, imageFile, setUploading, setInputError);
                 }}
             />
+            {errorAlert}
         </div>
-)}
+    )
+  }
+}

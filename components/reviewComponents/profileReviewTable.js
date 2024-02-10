@@ -12,7 +12,7 @@ export default function ProfileReviewTable({profileRestReviewsData, profileRestR
         : (
             <tbody>
                     {profileRestReviewsData.map((item, index) => (
-                        <tr className={styles.tableItem} key={index} onClick={() => router.push(`/reviews/${item.review_id}`)}>
+                        <tr className={styles.tableItem} key={"review" +index} onClick={() => router.push(`/reviews/${item.review_id}`)}>
                             <td>{item.rest_name}</td>
                             <td>{item.o_rating}</td>
                         </tr>

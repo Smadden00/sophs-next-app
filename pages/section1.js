@@ -30,17 +30,8 @@ export default function Section1() {
                     width={350}
                     src="/images/sophsLogo.png"
                     alt={"Food"}
-                /> 
+                />
             </div>
         </div>
     </div>
 )}
-
-/*
-                <Image 
-                    className={styles.image}
-                    height={350}
-                    width={350}
-                    src="/images/sophsLogo.png"
-                    alt={"Food"}
-                />*/

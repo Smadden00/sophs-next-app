@@ -25,7 +25,7 @@ export default function LoggedInProfileBody({}) {
         }
     }, [session])
 
-    const name = session.user.name;
+    const name = session ? session.user.name : undefined;
 
     return (
             <div className={styles.container}>

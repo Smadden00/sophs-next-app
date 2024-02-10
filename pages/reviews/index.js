@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router.js";
 import FetchAllReviews from "../../components/requests/fetchAllReviews";
 import FiltersButton from "../../components/filters/filtersButton";
-import AddReviewIcon from "../../components/svgs/addReviewIcon";
+import AddClipboardIcon from "../../components/svgs/addClipboardIcon";
 import QuickSort from "../../components/functions/quickSort";
 import SeparateSortBy from "../../components/functions/separateSortBy";
 
@@ -66,7 +66,7 @@ export default function AddReview() {
             onClick={() => router.push('reviews/addReview')}
           >
             <h2>Add Review</h2>
-            <AddReviewIcon />
+            <AddClipboardIcon />
           </div>
         </div>
         <div className={styles.titleContainer}>
@@ -81,7 +81,7 @@ export default function AddReview() {
               <option key="PriceLow" value="Price, Low to High">Price, Low to High</option>
             </select>
           </div>
-          {<FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks}/>}
+          <FiltersButton filterValuesAndCallbacks={filterValuesAndCallbacks} isReview={true}/>
         </div>
       </div>
       <div className={styles.content}>

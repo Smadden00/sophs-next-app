@@ -1,5 +1,5 @@
 import Header from "../../components/header";
-import LogInBody from "../../components/logInBody"
+import LogInBody from "../../components/logIn/logInBody"
 import { useSession } from "next-auth/react"
 import LoggedInProfileBody from "./loggedInProfileBody";
 

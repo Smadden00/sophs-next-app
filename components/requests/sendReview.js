@@ -1,21 +1,26 @@
 import SendReviewSafetyChecks from "../safetyChecks/sendReviewSafetyChecks";
+import AddSingleQuoteInFrontOfSingleQuote from "../functions/addSingleQuoteInFrontOfSingleQuote";
 
-export default async function SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities) {
-        try {
+export default async function SendReview(router, restaurantName, overallRating, price, taste, experience, description, state, city, cities, setInputError) {
+        try { 
             const safetyResponse = SendReviewSafetyChecks(restaurantName, overallRating, price, taste, experience, description, city, cities);
-            if (safetyResponse != "No errors"){
-                throw new Error(safetyResponse);
+            if (safetyResponse.isError){
+                setInputError(safetyResponse);
+                throw new Error(safetyResponse.message);
             }
+
+            const restaurantNameWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(restaurantName);
+            const descriptionWithSingleQuotesEscaped = AddSingleQuoteInFrontOfSingleQuote(description);
             
             const response = await fetch('/api/reviews', {
                 method: 'PUT',
                 body: JSON.stringify({
-                    rest_name: restaurantName,
+                    rest_name: restaurantNameWithSingleQuotesEscaped,
                     o_rating: overallRating, 
                     price: price, 
                     taste: taste, 
                     experience: experience, 
-                    description: description, 
+                    description: descriptionWithSingleQuotesEscaped, 
                     city: city,
                     state_code: state,
                     soph_submitted: false
@@ -29,6 +34,6 @@ export default async function SendReview(router, restaurantName, overallRating, 
             //if there are no errors, send the user back to the reviews page
             router.push('/reviews');
         } catch (error) {
-            console.error('Error sending the new review:', error);    
+            console.error(`Error in one of the fields: ${error}.`);    
         }
     };
