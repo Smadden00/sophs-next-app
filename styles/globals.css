@@ -8,7 +8,10 @@
   --color5: #75aecbef;
   --color6: #97CAEF;
   --color7: #FEFFFF;
-  --color8: #7fef4e;
+  --color7Transparent: #feffffe7;
+  --color8: #f9f773;
+  --color9: #f97373;
+  --color10: lightgoldenrodyellow;
 }
 
 html,
@@ -17,6 +20,7 @@ body {
   margin: 0;
   width: 100vw;
   font-family:
+  Optima, 
     Snell Roundhand,
     Poppins,
     Inter,
@@ -31,6 +35,7 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
+  font-weight: 100;
   color: var(--color7)
 }
 

@@ -20,6 +20,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  font-family: Snell Roundhand;
+  font-family: 600;
 }
 
 .section1Title1 {
@@ -104,8 +106,8 @@
 
 .section2Text {
   position: absolute;
-  width: 47%;
-  background-image: linear-gradient( to right, transparent, var(--color7) 20%, var(--color7) 80%, transparent);
+  width: 53%;
+  background-image: linear-gradient( to right, transparent, var(--color7Transparent) 20%, var(--color7Transparent) 80%, transparent);
   border-radius: 15px;
   color: var(--color2);
   padding-right: 10%;
@@ -255,11 +257,12 @@
 }
 
 .section3InspirationContainer {
-  width: 40%;
+  width: 80%;
   height: 10%;
 }
 
 .section3LinkText{
+  margin-top: 10%;
   font-size: 40px;
   text-decoration: none;
 }

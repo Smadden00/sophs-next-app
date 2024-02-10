@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Section4() {
 
+  //These images should be 400x700
 
   return (
     <div className={styles.section4}>
@@ -20,7 +21,7 @@ export default function Section4() {
               alt={"Food"}
           />
           <div className={styles.section4TextContainer}>
-            <Link className="link" href={{pathname: '/reviews'}}><h1 className={styles.section4Text}>Browse Community Reviews</h1></Link>
+            <Link className="link" href={{pathname: '/reviews'}}><h1 className={styles.section4Text}>Browse Community Restaurant Reviews</h1></Link>
           </div>
         </div>
         <div className={styles.section4ImageContainer}>

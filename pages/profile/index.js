@@ -1,8 +1,14 @@
-import styles from "./Profile.module.css";
+import Header from "../../components/header";
+import LogInBody from "../../components/logIn/logInBody"
+import { useSession } from "next-auth/react"
+import LoggedInProfileBody from "./loggedInProfileBody";
 
-export default function CommunityReviews() {
+export default function Profile() {
+  const { data: session } = useSession()
+
   return (
-    <div className={styles.ProfileContainer}>
-        Profile
-    </div>
+    <>
+        <Header />
+        {session ? <LoggedInProfileBody /> : <LogInBody pagePurpose={"view your profile"}/>}
+    </>
 )}

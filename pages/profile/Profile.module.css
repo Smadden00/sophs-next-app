@@ -1,18 +1,46 @@
-.main {
+.container{
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  width: 100%;
+  min-height: 78vh;
+  color: var(--color2);
+  padding-left: 5%;
+  padding-right: 5%;
+} 
+
+.titleContainer {
+  height: 25vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 80px;
+  color: var(--color2)
+}
+
+.contentContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
   width: 100%;
 }
 
-.profileContainer{
+.contentContainer > * {
+  flex: 1;
+}
+
+.content{
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 100vh;
-  color: var(--color2)
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.content:nth-of-type(1) {
+  border-right: solid 1px var(--color2);
 }
